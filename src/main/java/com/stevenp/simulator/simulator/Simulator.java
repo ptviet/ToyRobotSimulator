@@ -53,7 +53,10 @@ public class Simulator {
    * Returns the X,Y and Direction of the robot
    */
   public String report() {
-    return "";
+    if (robot.getPosition() == null)
+      return null;
+
+    return robot.getPosition().getX() + "," + robot.getPosition().getY() + "," + robot.getPosition().getDirection().toString();
   }
 
 }
