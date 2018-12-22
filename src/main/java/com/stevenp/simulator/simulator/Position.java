@@ -1,6 +1,7 @@
 package com.stevenp.simulator.simulator;
 
-import com.stevenp.simulator.exception.ToyRobotException;
+import com.stevenp.simulator.exception.SimulatorException;
+import com.stevenp.simulator.simulator.enums.Direction;
 
 public class Position {
   private int x;
@@ -24,9 +25,9 @@ public class Position {
     this.y = this.y + y;
   }
 
-  public Position getNextPosition() throws ToyRobotException {
+  public Position getNextPosition() throws SimulatorException {
     if (this.direction == null)
-      throw new ToyRobotException("Invalid robot direction");
+      throw new SimulatorException("Invalid robot direction");
 
     // new position to validate
     Position newPosition = new Position(this);

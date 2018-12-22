@@ -1,4 +1,4 @@
-package com.stevenp.simulator.simulator;
+package com.stevenp.simulator.simulator.enums;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +48,5 @@ public enum Direction {
 
     return Direction.valueOf(newIndex);
   }
-
-
 
 }

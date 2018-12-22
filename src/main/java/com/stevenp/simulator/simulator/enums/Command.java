@@ -1,4 +1,4 @@
-package com.stevenp.simulator.simulator;
+package com.stevenp.simulator.simulator.enums;
 
 public enum Command {
   PLACE,
