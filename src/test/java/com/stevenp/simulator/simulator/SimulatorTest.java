@@ -46,10 +46,34 @@ public class SimulatorTest {
   }
 
   @Test
-  public void eval() throws SimulatorException {
+  public void simulate() throws SimulatorException {
+
+    simulator.simulate("PLACE 0,0,NORTH");
+    Assert.assertEquals("0,0,NORTH", simulator.report());
+
+    simulator.simulate("MOVE");
+    simulator.simulate("RIGHT");
+    simulator.simulate("MOVE");
+    Assert.assertEquals("1,1,EAST", simulator.report());
+
+    // if it goes out of the board it ignores the command
+    for (int i = 0; i < 10; i++)
+      simulator.simulate("MOVE");
+    Assert.assertEquals("5,1,EAST", simulator.report());
+
+    //rotate on itself
+    for (int i = 0; i < 4; i++)
+      simulator.simulate("LEFT");
+    Assert.assertEquals("5,1,EAST", simulator.report());
+
   }
 
-  @Test
-  public void report() throws SimulatorException {
+  @Test(expected = SimulatorException.class)
+  public void testInvalidCommand() throws SimulatorException {
+    // invalid commands - typos
+    simulator.simulate("PLACE12NORTH");
+    simulator.simulate("LEFFT");
+    simulator.simulate("RIGHTT");
   }
+
 }
