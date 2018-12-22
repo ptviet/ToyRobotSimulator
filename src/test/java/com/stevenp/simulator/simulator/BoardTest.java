@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 public class BoardTest {
 
   @Test
-  public void isValidPosition() {
+  public void isValidPosition() throws Exception {
     Position mockPosition = mock(Position.class);
     Board board = new Board(5, 5);
 

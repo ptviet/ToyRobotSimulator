@@ -1,6 +1,5 @@
 package com.stevenp.simulator.simulator.enums;
 
-import com.stevenp.simulator.simulator.enums.Direction;
 import org.junit.Assert;
 import org.junit.Test;
 
