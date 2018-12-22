@@ -36,12 +36,9 @@ public class SimulatorTest {
     Assert.assertFalse(simulator.placeRobot(new Position(-1, 5, Direction.EAST)));
   }
 
-  @Test
+  @Test(expected = SimulatorException.class)
   public void testPlacingExceptions() throws SimulatorException {
-
-    thrown.expect(SimulatorException.class);
     simulator.placeRobot(null);
-    thrown.expect(SimulatorException.class);
     simulator.placeRobot(new Position(0, 1, null));
   }
 

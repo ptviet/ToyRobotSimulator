@@ -93,7 +93,7 @@ public class Simulator {
         robot.rotateRight();
         break;
       case REPORT:
-        System.out.println(this.report());
+        System.out.println("\n" + this.report() + "\n");
         break;
       default:
         throw new SimulatorException("Invalid command");
