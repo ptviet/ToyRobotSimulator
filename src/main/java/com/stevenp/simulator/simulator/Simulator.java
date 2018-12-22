@@ -24,6 +24,9 @@ public class Simulator {
     if (board == null)
       throw new SimulatorException("Invalid Board object");
 
+    if (robot == null)
+      throw new SimulatorException("Invalid Robot object");
+
     if (position == null)
       throw new SimulatorException("Invalid Position object");
 
@@ -48,6 +51,7 @@ public class Simulator {
    *
    */
   public void simulate(String inputString) throws SimulatorException {
+
     String[] args = inputString.split(" ");
 
     // validate command
@@ -82,18 +86,34 @@ public class Simulator {
         placeRobot(new Position(x, y, commandDirection));
         break;
       case MOVE:
-        Position newPosition = robot.getPosition().getNextPosition();
-        if (board.isValidPosition(newPosition))
-          robot.setPosition(newPosition);
+        if (robot.getPosition() != null) {
+          Position newPosition = robot.getPosition().getNextPosition();
+          if (board.isValidPosition(newPosition))
+            robot.setPosition(newPosition);
+        } else {
+          throw new SimulatorException("Invalid command");
+        }
         break;
       case LEFT:
-        robot.rotateLeft();
+        if (robot.getPosition() != null) {
+          robot.rotateLeft();
+        } else {
+          throw new SimulatorException("Invalid command");
+        }
         break;
       case RIGHT:
-        robot.rotateRight();
+        if (robot.getPosition() != null) {
+          robot.rotateRight();
+        } else {
+          throw new SimulatorException("Invalid command");
+        }
         break;
       case REPORT:
-        System.out.println("\n" + this.report() + "\n");
+        if (robot.getPosition() != null) {
+          System.out.println("\n" + this.report() + "\n");
+        } else {
+          throw new SimulatorException("Invalid command");
+        }
         break;
       default:
         throw new SimulatorException("Invalid command");

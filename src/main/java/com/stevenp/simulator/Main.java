@@ -22,7 +22,7 @@ public class Main implements CommandLineRunner {
   public void run(String... args) throws Exception {
 
     Scanner scanner = new Scanner(System.in);
-    Board board = new Board(5, 5);
+    Board board = new Board(4, 4);
     Robot robot = new Robot();
     Simulator simulator = new Simulator(board, robot);
 
@@ -31,7 +31,7 @@ public class Main implements CommandLineRunner {
     System.out.println("___________________");
     System.out.println("\nValid commands are:");
     System.out.println("\'PLACE X,Y,NORTH|SOUTH|EAST|WEST\', MOVE, LEFT, RIGHT, REPORT or EXIT");
-    System.out.println("\nEnter a command: \n");
+    System.out.println("\nPLACE a Robot: \n");
     System.out.print("> ");
     boolean keepRunning = true;
     while (keepRunning) {
