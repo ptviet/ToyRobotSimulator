@@ -82,3 +82,33 @@ Expected output:
 Expected output
 
     3,3,NORTH
+
+
+
+
+How to run the program
+======================
+
+## Pre requisites
+
+Have [Home Brew](https://brew.sh/) installed.
+
+Have maven installed:
+
+```sh
+brew install maven
+```
+
+## Run the program
+
+```sh
+Unzip the file
+```
+
+```sh
+Open Terminal app, cd into simulator folder
+```
+
+```sh
+Run command: mvn spring-boot:run
+```
