@@ -1,15 +1,25 @@
-package com.stevenp.simulator.simulator;
+package com.stevenp.simulator.simulator.service;
 
 import com.stevenp.simulator.exception.SimulatorException;
-import com.stevenp.simulator.simulator.enums.Command;
-import com.stevenp.simulator.simulator.enums.Direction;
+import com.stevenp.simulator.simulator.enums.*;
+import com.stevenp.simulator.simulator.model.*;
+import org.springframework.stereotype.Service;
 
-public class Simulator {
+@Service
+public class SimulatorImpl implements Simulator {
   private Board board;
   private Robot robot;
 
-  public Simulator(Board board, Robot robot) {
+  public SimulatorImpl() {
+  }
+
+  @Override
+  public void initBoard(Board board) {
     this.board = board;
+  }
+
+  @Override
+  public void initRobot(Robot robot) {
     this.robot = robot;
   }
 
@@ -20,6 +30,7 @@ public class Simulator {
    * @return true if placed successfully
    * @throws SimulatorException
    */
+  @Override
   public boolean placeRobot(Position position) throws SimulatorException {
     if (board == null)
       throw new SimulatorException("Invalid Board object");
@@ -50,6 +61,7 @@ public class Simulator {
    * @throws SimulatorException
    *
    */
+  @Override
   public void simulate(String inputString) throws SimulatorException {
 
     String[] args = inputString.split(" ");
@@ -81,54 +93,42 @@ public class Simulator {
       }
     }
 
+    if (command != Command.PLACE) {
+      if (robot.getPosition() == null) {
+        throw new SimulatorException("Place Robot on Board first!");
+      }
+    }
+
     switch (command) {
       case PLACE:
         placeRobot(new Position(x, y, commandDirection));
         break;
+
       case MOVE:
-        if (robot.getPosition() != null) {
-          Position newPosition = robot.getPosition().getNextPosition();
-          if (board.isValidPosition(newPosition))
-            robot.setPosition(newPosition);
-        } else {
-          throw new SimulatorException("Invalid command");
-        }
+        if (board.isValidPosition(robot.getPosition().getNextPosition()))
+          robot.move();
         break;
+
       case LEFT:
-        if (robot.getPosition() != null) {
-          robot.rotateLeft();
-        } else {
-          throw new SimulatorException("Invalid command");
-        }
+        robot.rotateLeft();
         break;
+
       case RIGHT:
-        if (robot.getPosition() != null) {
-          robot.rotateRight();
-        } else {
-          throw new SimulatorException("Invalid command");
-        }
+        robot.rotateRight();
         break;
+
       case REPORT:
-        if (robot.getPosition() != null) {
-          System.out.println("\n" + this.report() + "\n");
-        } else {
-          throw new SimulatorException("Invalid command");
-        }
+        System.out.println("\n" + report() + "\n");
         break;
+
       default:
         throw new SimulatorException("Invalid command");
     }
 
   }
 
-  /*
-   * Returns the X,Y and Direction of the robot
-   */
+  @Override
   public String report() {
-    if (robot.getPosition() == null)
-      return null;
-
-    return robot.getPosition().getX() + "," + robot.getPosition().getY() + "," + robot.getPosition().getDirection().toString();
+    return robot.report();
   }
-
 }

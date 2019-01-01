@@ -1,4 +1,4 @@
-package com.stevenp.simulator.simulator;
+package com.stevenp.simulator.simulator.model;
 
 import com.stevenp.simulator.exception.SimulatorException;
 import com.stevenp.simulator.simulator.enums.Direction;

@@ -1,18 +1,19 @@
 package com.stevenp.simulator;
 
 import com.stevenp.simulator.exception.SimulatorException;
-import com.stevenp.simulator.simulator.Board;
-import com.stevenp.simulator.simulator.Robot;
-import com.stevenp.simulator.simulator.Simulator;
+import com.stevenp.simulator.simulator.service.Simulator;
+import com.stevenp.simulator.simulator.model.Board;
+import com.stevenp.simulator.simulator.model.Robot;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.util.Scanner;
-
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
+  @Autowired
+  Simulator simulator;
 
   public static void main(String[] args) {
     SpringApplication.run(Main.class, args);
@@ -22,12 +23,11 @@ public class Main implements CommandLineRunner {
   public void run(String... args) throws Exception {
 
     Scanner scanner = new Scanner(System.in);
-    Board board = new Board(4, 4);
-    Robot robot = new Robot();
-    Simulator simulator = new Simulator(board, robot);
+    simulator.initBoard(new Board(5, 5));
+    simulator.initRobot(new Robot());
 
     System.out.println("___________________");
-    System.out.println("Toy Robot Simulator");
+    System.out.println("Toy Robot SimulatorImpl");
     System.out.println("___________________");
     System.out.println("\nValid commands are:");
     System.out.println("\'PLACE X,Y,NORTH|SOUTH|EAST|WEST\', MOVE, LEFT, RIGHT, REPORT or EXIT");

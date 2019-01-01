@@ -1,28 +1,24 @@
-package com.stevenp.simulator.simulator;
+package com.stevenp.simulator.simulator.service;
 
 import com.stevenp.simulator.exception.SimulatorException;
 import com.stevenp.simulator.simulator.enums.Direction;
+import com.stevenp.simulator.simulator.model.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class SimulatorTest {
+public class SimulatorImplTest {
 
-  private final int BOARD_ROWS = 5;
-  private final int BOARD_COLUMNS = 5;
-  private Board board;
-  private Robot robot;
   private Simulator simulator;
 
   @Before
   public void setUp() throws Exception {
-    board = new Board(BOARD_COLUMNS, BOARD_ROWS);
-    robot = new Robot();
-    simulator = new Simulator(board, robot);
+    simulator = new SimulatorImpl();
+    simulator.initBoard(new Board(5, 5));
+    simulator.initRobot(new Robot());
   }
-
 
   @Rule
   public org.junit.rules.ExpectedException thrown = ExpectedException.none();
@@ -68,9 +64,11 @@ public class SimulatorTest {
   @Test(expected = SimulatorException.class)
   public void testInvalidCommand() throws SimulatorException {
     // invalid commands - typos
+    simulator.simulate("REPORT");
     simulator.simulate("PLACE12NORTH");
     simulator.simulate("LEFFT");
     simulator.simulate("RIGHTT");
+    simulator.simulate("MOOV");
   }
 
 }

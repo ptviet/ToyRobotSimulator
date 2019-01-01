@@ -1,4 +1,4 @@
-package com.stevenp.simulator.simulator;
+package com.stevenp.simulator.simulator.model;
 
 public class Board {
   private int rows;

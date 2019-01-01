@@ -1,4 +1,4 @@
-package com.stevenp.simulator.simulator;
+package com.stevenp.simulator.simulator.model;
 
 import com.stevenp.simulator.exception.SimulatorException;
 
@@ -48,5 +48,17 @@ public class Robot {
       this.position.setDirection(this.position.getDirection().rightDirection());
     }
   }
+
+  /*
+   * Returns the X,Y and Direction of the robot
+   */
+  public String report() {
+    if (this.getPosition() == null)
+      return null;
+
+    return this.position.getX() + "," + this.position.getY() + "," + this.position.getDirection().toString();
+  }
+
+
 
 }
